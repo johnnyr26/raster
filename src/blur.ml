@@ -2,7 +2,12 @@ open Core
 
 (* You need to modify this function to blur the input image
    based on the provided radius instead of ignoring it. *)
-let transform image ~radius:_ = image
+let transform image ~radius = 
+  Image.mapi image ~f: (fun ~x ~y pixel -> (
+    if x - radius < 0 || x + radius >= Image.width image || y - radius < 0 || y + radius >= Image.height image then pixel else
+    let sliced_image = Image.slice image ~x_start: (x - radius) ~x_end: (x + radius) ~y_start: (y - radius) ~y_end: (y + radius) 
+    in Image.mean_pixel sliced_image
+  ))
 
 let command =
   Command.basic

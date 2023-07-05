@@ -4,7 +4,7 @@ open Core
    the "blue" pixels of the foreground image with pixels from the
    corresponding position in the background image instead of just ignoring
    the background image and returning the foreground image. *)
-let transform ~foreground ~(background: Image.t):_ =
+let transform ~foreground ~background =
   Image.mapi foreground ~f:(fun ~x ~y pixel ->
     if Pixel.blue pixel > Pixel.red pixel + Pixel.green pixel
     then Image.get background ~x ~y
