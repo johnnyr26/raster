@@ -12,7 +12,6 @@ let distribute_error
       Int.to_float (Pixel.red (Image.get image ~x: (x + 1) ~y))
       /. Int.to_float (Image.max_val image)
     in
-    Core.printf "Pixel value: %f \n" (Int.to_float (Pixel.red (Image.get image ~x ~y)));
     let new_pixel_value = pixel_value +. (7.0 *. error /. 16.0) in
     let new_pixel_rgb = Float.to_int (Int.to_float (Image.max_val image) *. new_pixel_value) in
     Image.set
@@ -63,8 +62,6 @@ let distribute_error
       (new_pixel_rgb, new_pixel_rgb, new_pixel_rgb));
 ;;
 
-let _ = distribute_error
-
 let rec iterate_image ~(image : Image.t) ~(x : int) ~(y : int) : Image.t =
   if y = Image.height image
   then image
@@ -72,11 +69,9 @@ let rec iterate_image ~(image : Image.t) ~(x : int) ~(y : int) : Image.t =
   then iterate_image ~image ~x:0 ~y:(y + 1)
   else (
     let pixel = Image.get image ~x ~y in
-    (* Core.print_s [%message (pixel: Pixel.t)]; *)
     let pixel_value =
       Int.to_float (Pixel.red pixel) /. Int.to_float (Image.max_val image)
     in
-    (* Core.printf "Pixel: %f x: %d y: %d \n" (Int.to_float (Pixel.red pixel)) x y; *)
     if Float.compare pixel_value 0.5 > 0
     then (
       Image.set
