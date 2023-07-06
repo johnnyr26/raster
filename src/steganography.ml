@@ -1,7 +1,5 @@
 open Core
 
-(* You need to change the implementation of this function so that it does
-   something to the image instead of just leaving it untouched. *)
 let transform image =
   Image.map image ~f: (fun pixel -> (
     (((Pixel.red pixel) % 4) lsl 6, ((Pixel.green pixel) % 4) lsl 6, ((Pixel.blue pixel) % 4) lsl 6)
