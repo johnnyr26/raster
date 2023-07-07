@@ -88,9 +88,6 @@ let rec iterate_image ~(image : Image.t) ~(x : int) ~(y : int) : Image.t =
     iterate_image ~image ~x:(x + 1) ~y)
 ;;
 
-(* [6, 4, 5, 7, 6] -> 3 [1, 2, 3, 4, 5]*)
-
-(* This should look familiar by now! *)
 let transform image =
   let image = Grayscale.transform image in
   iterate_image ~image ~x:0 ~y:0
