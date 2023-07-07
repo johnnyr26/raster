@@ -10,5 +10,6 @@ let command =
     ; "steganography", Steganography.command
     ; "edge", Edge.command
     ; "color-dither", Color_dither.command
+    ; "solarize", Solarize.command
     ]
 ;;
